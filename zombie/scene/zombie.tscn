@@ -565,3 +565,5 @@ autoplay = "mixamo_com"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0.00218197, 0.0645355, 0.0117188)
 shape = SubResource("BoxShape3D_cq6p0")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]

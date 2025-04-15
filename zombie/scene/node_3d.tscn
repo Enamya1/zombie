@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://dycnkeaf2pdtp"]
+[gd_scene load_steps=13 format=3 uid="uid://dycnkeaf2pdtp"]
 
 [ext_resource type="Texture2D" uid="uid://b043qyuyn3n0a" path="res://3D-Tutorial-Files-main/assets/Sprites/floor_texture.png" id="1_0cfwr"]
 [ext_resource type="PackedScene" uid="uid://cxpdbgqcsb0fa" path="res://scene/wall.tscn" id="1_gl4or"]
 [ext_resource type="PackedScene" uid="uid://cmyj78l3criw6" path="res://palyer/character_body_3d.tscn" id="2_eete0"]
 [ext_resource type="PackedScene" uid="uid://blacl1o6havfy" path="res://scene/zombie.tscn" id="2_f17ij"]
+[ext_resource type="PackedScene" uid="uid://dh2er8qed5l5x" path="res://scripts/pson_point.tscn" id="5_2c074"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0cfwr"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -17,6 +18,10 @@ background_mode = 2
 sky = SubResource("Sky_f17ij")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_f17ij"]
+vertices = PackedVector3Array(4.75, 0.45, -3.5, 6, 0.45, -3.5, 6, 0.45, -49.5, 4.5, 0.45, -2.25, -49.5, 0.45, -49.5, -49.5, 0.45, -2.25, 7.5, 0.45, -3.5, 7.75, 0.45, -2.25, 49.5, 0.45, -2.25, 49.5, 0.45, -49.5, 6, 0.45, 49.5, 6, 0.45, -1.25, 4.75, 0.45, -1.25, -49.5, 0.45, 49.5, 7.5, 0.45, -1.25, 49.5, 0.45, 49.5)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(0, 3, 2), PackedInt32Array(2, 3, 5), PackedInt32Array(2, 5, 4), PackedInt32Array(7, 6, 8), PackedInt32Array(8, 6, 9), PackedInt32Array(9, 6, 2), PackedInt32Array(6, 1, 2), PackedInt32Array(12, 11, 10), PackedInt32Array(12, 10, 3), PackedInt32Array(3, 10, 5), PackedInt32Array(5, 10, 13), PackedInt32Array(7, 8, 14), PackedInt32Array(14, 8, 15), PackedInt32Array(14, 15, 10), PackedInt32Array(10, 11, 14)]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f17ij"]
 albedo_color = Color(0.00309278, 0.105586, 0.116766, 1)
@@ -40,24 +45,30 @@ directional_shadow_max_distance = 455.0
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_2c074")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-material_override = SubResource("StandardMaterial3D_f17ij")
-mesh = SubResource("BoxMesh_vytwi")
-skeleton = NodePath("../..")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("BoxShape3D_gl4or")
-
-[node name="wall" parent="." instance=ExtResource("1_gl4or")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.9889, 0.529173, 0.363808)
-
 [node name="CharacterBody3D" parent="." instance=ExtResource("2_eete0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 1, 11)
 
-[node name="wall2" parent="." instance=ExtResource("1_gl4or")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.6032, 0.549999, -2.42244)
-
 [node name="CharacterBody3D2" parent="." instance=ExtResource("2_f17ij")]
 transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, -0.390831, 35.147, -9.04553)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_f17ij")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D"]
+material_override = SubResource("StandardMaterial3D_f17ij")
+mesh = SubResource("BoxMesh_vytwi")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D"]
+shape = SubResource("BoxShape3D_gl4or")
+
+[node name="wall" parent="NavigationRegion3D/StaticBody3D" instance=ExtResource("1_gl4or")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.50143, 1.45244, -2.27193)
+
+[node name="wall2" parent="NavigationRegion3D/StaticBody3D" instance=ExtResource("1_gl4or")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.6032, 0.549999, -2.42244)
+
+[node name="pson_point" parent="." instance=ExtResource("5_2c074")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.0796, 0.0499997, -41.949)
