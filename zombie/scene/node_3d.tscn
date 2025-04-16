@@ -1,9 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://dycnkeaf2pdtp"]
+[gd_scene load_steps=12 format=3 uid="uid://dycnkeaf2pdtp"]
 
 [ext_resource type="Texture2D" uid="uid://b043qyuyn3n0a" path="res://3D-Tutorial-Files-main/assets/Sprites/floor_texture.png" id="1_0cfwr"]
 [ext_resource type="PackedScene" uid="uid://cxpdbgqcsb0fa" path="res://scene/wall.tscn" id="1_gl4or"]
 [ext_resource type="PackedScene" uid="uid://cmyj78l3criw6" path="res://palyer/character_body_3d.tscn" id="2_eete0"]
-[ext_resource type="PackedScene" uid="uid://blacl1o6havfy" path="res://scene/zombie.tscn" id="2_f17ij"]
 [ext_resource type="PackedScene" uid="uid://dh2er8qed5l5x" path="res://scripts/pson_point.tscn" id="5_2c074"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0cfwr"]
@@ -48,9 +47,6 @@ environment = SubResource("Environment_2c074")
 [node name="CharacterBody3D" parent="." instance=ExtResource("2_eete0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 1, 11)
 
-[node name="CharacterBody3D2" parent="." instance=ExtResource("2_f17ij")]
-transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, -0.390831, 35.147, -9.04553)
-
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_f17ij")
 
@@ -71,4 +67,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.50143, 1.45244, -2.27193)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.6032, 0.549999, -2.42244)
 
 [node name="pson_point" parent="." instance=ExtResource("5_2c074")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.0796, 0.0499997, -41.949)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.90164, 11.2654, -28.4904)
